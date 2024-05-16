@@ -13,6 +13,13 @@ namespace ProyectoFINAL
         public double cantidadLitros { get; set; }
         public double precioLitros { get; set; }
 
+        public bool estado {  get; set; }
+
+        public Bomba()
+        {
+
+        }
+
 
 
     }

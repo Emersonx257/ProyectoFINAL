@@ -34,6 +34,7 @@
             editToolStripMenuItem = new ToolStripMenuItem();
             registrosToolStripMenuItem = new ToolStripMenuItem();
             solicitudesToolStripMenuItem = new ToolStripMenuItem();
+            panel1 = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -43,7 +44,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { archivoToolStripMenuItem, editToolStripMenuItem, registrosToolStripMenuItem, solicitudesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1071, 28);
+            menuStrip1.Size = new Size(1379, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -79,15 +80,24 @@
             solicitudesToolStripMenuItem.Size = new Size(95, 24);
             solicitudesToolStripMenuItem.Text = "Solicitudes";
             // 
+            // panel1
+            // 
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 28);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1379, 523);
+            panel1.TabIndex = 1;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1071, 450);
+            ClientSize = new Size(1379, 551);
+            Controls.Add(panel1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
-            Text = "Form1";
+            Text = "Gasolinera";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -102,5 +112,6 @@
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem registrosToolStripMenuItem;
         private ToolStripMenuItem solicitudesToolStripMenuItem;
+        private Panel panel1;
     }
 }
