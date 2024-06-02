@@ -1,5 +1,5 @@
 using System.IO.Ports;
-using System.Text.Json;
+using Newtonsoft.Json; 
 
 namespace ProyectoFINAL
 {
@@ -25,11 +25,57 @@ namespace ProyectoFINAL
             serialPort = new SerialPort();
             serialPort.BaudRate = baudRate;
             serialPort.PortName = portName;
+            serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+            try
+            {
+                serialPort.Open();
+            }
+            catch { }
             ventaList = new List<Venta>();
+
+
+
+
 
         }
 
 
+
+        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                string data = serialPort.ReadLine();
+                this.BeginInvoke(new Action(() =>
+                {
+
+                    ProcesarDatosJson(data);
+                }));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error al leer los datos: " + ex.Message);
+            }
+        }
+
+        private void ProcesarDatosJson(string data)
+        {
+            try
+            {
+                dynamic json = JsonConvert.DeserializeObject(data);
+                string sensor = json.sensor;
+                double valor = json.valor;
+                string unidad = json.unidad;
+
+                // Muestra los datos en un MessageBox o actualiza la UI
+                MessageBox.Show($"Sensor: {sensor}\nValor: {valor}\nUnidad: {unidad}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al procesar JSON: " + ex.Message);
+            }
+        }
 
 
 
@@ -46,7 +92,8 @@ namespace ProyectoFINAL
                 {
                     bombas[0].id = 1;
                     bombas[0].estado = true;
-                    bombas[0].precioSolicitado = Solicitud.precio;
+                    bombas[0].cantidadLitros = Solicitud.litros;
+
 
 
                     label4.Text = Solicitud.litros.ToString();
@@ -56,6 +103,8 @@ namespace ProyectoFINAL
                 {
                     bombas[1].id = 2;
                     bombas[1].estado = true;
+                    bombas[1].cantidadLitros = Solicitud.litros;
+
 
                     label7.Text = Solicitud.litros.ToString();
                     label6.Text = Solicitud.precio.ToString();
@@ -64,6 +113,8 @@ namespace ProyectoFINAL
                 {
                     bombas[2].id = 3;
                     bombas[2].estado = true;
+                    bombas[2].cantidadLitros = Solicitud.litros;
+
 
                     label11.Text = Solicitud.litros.ToString();
                     label10.Text = Solicitud.precio.ToString();
@@ -72,6 +123,8 @@ namespace ProyectoFINAL
                 {
                     bombas[3].id = 4;
                     bombas[3].estado = true;
+                    bombas[3].cantidadLitros = Solicitud.litros;
+
 
                     label15.Text = Solicitud.litros.ToString();
                     label14.Text = Solicitud.precio.ToString();
@@ -89,149 +142,158 @@ namespace ProyectoFINAL
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string solicitud = JsonSerializer.Serialize(bombas[0]);
 
-            Venta venta = new Venta(bombas[0].id, DateTime.Now.ToString("d"), DateTime.Now.ToString("s"), Solicitud.litros, Solicitud.precio);
-            try
+
+            //  Venta venta = new Venta(bombas[0].id, DateTime.Now.ToString("d"), DateTime.Now.ToString("s"), Solicitud.litros, Solicitud.precio);
+            if (serialPort.IsOpen)
             {
+                try
+                {
+                    string mesanje = JsonConvert.SerializeObject(bombas, Formatting.Indented); ;
+                    // MessageBox.Show(mesanje);
+                    serialPort.WriteLine(mesanje);
 
-                serialPort.Open();
-
-                serialPort.WriteLine(solicitud);
-                MessageBox.Show("" + solicitud);
-                Console.WriteLine($"Sent message: {solicitud}");
-
-                serialPort.Close();
-                VerificarEntradas.Start();
+                    textBox1.Text = (mesanje);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                try
+                {
+                    serialPort.Open();
+                }
+                catch (Exception ex)
+
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string solicitud = JsonSerializer.Serialize(bombas[1]);
-
-
-            try
+            if (serialPort.IsOpen)
             {
+                try
+                {
+                    string mesanje = JsonConvert.SerializeObject(bombas, Formatting.Indented); ;
+                    // MessageBox.Show(mesanje);
+                    serialPort.WriteLine(mesanje);
 
-
-
-
-                serialPort.Open();
-
-                serialPort.WriteLine(solicitud);
-                MessageBox.Show("" + solicitud);
-                Console.WriteLine($"Sent message: {solicitud}");
-
-                serialPort.Close();
+                    textBox1.Text = (mesanje);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                try
+                {
+                    serialPort.Open();
+                }
+                catch (Exception ex)
+
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
+
+
+
         }
 
         private void button6_Click(object sender, EventArgs e)
-        {
-            string solicitud = JsonSerializer.Serialize(bombas[2]);
-
-
-            try
-            {
-
-
-
-
-                serialPort.Open();
-
-                serialPort.WriteLine(solicitud);
-                MessageBox.Show("" + solicitud);
-                Console.WriteLine($"Sent message: {solicitud}");
-
-                serialPort.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            string solicitud = JsonSerializer.Serialize(bombas[3]);
-
-
-            try
-            {
-
-
-
-
-                serialPort.Open();
-
-                serialPort.WriteLine(solicitud);
-                MessageBox.Show("" + solicitud);
-                Console.WriteLine($"Sent message: {solicitud}");
-
-                serialPort.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-        }
-
-        private void VerificarEntradas_Tick(object sender, EventArgs e)
         {
             if (serialPort.IsOpen)
             {
                 try
                 {
-                    string indata = serialPort.ReadExisting();
-                    if (!string.IsNullOrEmpty(indata))
-                    {
-                        int value;
-                        if (int.TryParse(indata.Trim(), out value))
-                        {
-                            if (value < 100)
-                            {
-                                progressBar1.Invoke((MethodInvoker)delegate
-                                {
-                                    progressBar1.Value = value;
-                                });
-                            }
-                            else
-                            {
-                                progressBar1.Invoke((MethodInvoker)delegate
-                                {
-                                    progressBar1.Value = 0;
-                                });
-                                serialPort.Close();
-                                VerificarEntradas.Stop();
-                            }
-                        }
-                    }
+                    string mesanje = JsonConvert.SerializeObject(bombas, Formatting.Indented); ;
+                    // MessageBox.Show(mesanje);
+                    serialPort.WriteLine(mesanje);
+
+                    textBox1.Text = (mesanje);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
-                    VerificarEntradas.Stop();
-                    Console.WriteLine(ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
             {
-                serialPort.Open();
+                try
+                {
+                    serialPort.Open();
+                }
+                catch (Exception ex)
+
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (serialPort.IsOpen)
+            {
+                try
+                {
+                    string mesanje = JsonConvert.SerializeObject(bombas, Formatting.Indented); ;
+                    // MessageBox.Show(mesanje);
+                    serialPort.WriteLine(mesanje);
+
+                    textBox1.Text = (mesanje);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                try
+                {
+                    serialPort.Open();
+                }
+                catch (Exception ex)
+
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void VerificarEntradas_Tick(object sender, EventArgs e)
+        {
+
+
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                serialPort.Close();
+            }
+            catch { }
+        }
+
+        private void verVentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ventas ventas = new Ventas();
+            ventas.Show();
         }
     }
 }

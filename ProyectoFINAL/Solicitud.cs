@@ -11,6 +11,7 @@ namespace ProyectoFINAL
         public static int id {  get; set; }
         public static double litros { get; set; }
         public static double precio { get; set; }
+        public static string cliente { get; set;}
 
     }
 }

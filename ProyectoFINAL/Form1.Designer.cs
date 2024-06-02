@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panel1 = new Panel();
             panel3 = new Panel();
+            textBox1 = new TextBox();
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
             dataGridView1 = new DataGridView();
@@ -131,6 +132,7 @@
             // 
             panel3.BackgroundImage = (Image)resources.GetObject("panel3.BackgroundImage");
             panel3.BackgroundImageLayout = ImageLayout.Stretch;
+            panel3.Controls.Add(textBox1);
             panel3.Controls.Add(pictureBox3);
             panel3.Controls.Add(pictureBox2);
             panel3.Controls.Add(dataGridView1);
@@ -140,6 +142,14 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(717, 879);
             panel3.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(227, 451);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(271, 182);
+            textBox1.TabIndex = 11;
             // 
             // pictureBox3
             // 
@@ -712,13 +722,14 @@
             // verVentasToolStripMenuItem
             // 
             verVentasToolStripMenuItem.Name = "verVentasToolStripMenuItem";
-            verVentasToolStripMenuItem.Size = new Size(201, 26);
+            verVentasToolStripMenuItem.Size = new Size(224, 26);
             verVentasToolStripMenuItem.Text = "Ver Ventas";
+            verVentasToolStripMenuItem.Click += verVentasToolStripMenuItem_Click;
             // 
             // cargarRegistrosToolStripMenuItem
             // 
             cargarRegistrosToolStripMenuItem.Name = "cargarRegistrosToolStripMenuItem";
-            cargarRegistrosToolStripMenuItem.Size = new Size(201, 26);
+            cargarRegistrosToolStripMenuItem.Size = new Size(224, 26);
             cargarRegistrosToolStripMenuItem.Text = "Cargar Registros";
             // 
             // menuStrip1
@@ -764,8 +775,10 @@
             Margin = new Padding(6, 5, 6, 5);
             Name = "Form1";
             Text = "Gasolinera";
+            FormClosing += Form1_FormClosing;
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -858,5 +871,6 @@
         private PictureBox pictureBox6;
         private PictureBox pictureBox5;
         private PictureBox pictureBox4;
+        private TextBox textBox1;
     }
 }

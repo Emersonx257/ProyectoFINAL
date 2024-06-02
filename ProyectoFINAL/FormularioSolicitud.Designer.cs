@@ -42,6 +42,8 @@
             numericBomba = new NumericUpDown();
             txtPrecio = new TextBox();
             txtLitros = new TextBox();
+            textBox1 = new TextBox();
+            label5 = new Label();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -100,6 +102,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(txtInfoPrecio);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
@@ -121,7 +125,7 @@
             txtInfoPrecio.Location = new Point(120, 169);
             txtInfoPrecio.Name = "txtInfoPrecio";
             txtInfoPrecio.ReadOnly = true;
-            txtInfoPrecio.Size = new Size(151, 27);
+            txtInfoPrecio.Size = new Size(80, 27);
             txtInfoPrecio.TabIndex = 7;
             // 
             // label4
@@ -184,8 +188,24 @@
             txtLitros.Location = new Point(295, 127);
             txtLitros.Name = "txtLitros";
             txtLitros.Size = new Size(125, 27);
-            txtLitros.TabIndex = 0;
+            txtLitros.TabIndex = 56;
             txtLitros.TextChanged += txtLitros_TextChanged;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(295, 169);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(125, 27);
+            textBox1.TabIndex = 57;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(224, 172);
+            label5.Name = "label5";
+            label5.Size = new Size(58, 20);
+            label5.TabIndex = 58;
+            label5.Text = "Cliente:";
             // 
             // FormularioSolicitud
             // 
@@ -226,5 +246,7 @@
         private Label label3;
         private Label label2;
         private Label label1;
+        private Label label5;
+        private TextBox textBox1;
     }
 }
