@@ -48,22 +48,40 @@ namespace ProyectoFINAL
                 string data = serialPort.ReadLine();
                 this.BeginInvoke(new Action(() =>
                 {
-
-                    ProcesarDatosJson(data);
+                    ProcesarDatos(data);
                 }));
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Error al leer los datos: " + ex.Message);
             }
         }
 
-        private void ProcesarDatosJson(string data)
+        private void ProcesarDatos(string data)
         {
             try
             {
+                // Intentar deserializar el JSON
                 dynamic json = JsonConvert.DeserializeObject(data);
+                // Si la deserialización tiene éxito, procesar los datos JSON
+                ProcesarDatosJson(json);
+            }
+            catch (JsonException)
+            {
+                // Si la deserialización falla, mostrar el mensaje como texto plano
+                MessageBox.Show(data);
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier otro tipo de excepción
+                MessageBox.Show("Error al procesar los datos: " + ex.Message);
+            }
+        }
+
+        private void ProcesarDatosJson(dynamic json)
+        {
+            try
+            {
                 string sensor = json.sensor;
                 double valor = json.valor;
                 string unidad = json.unidad;
@@ -93,9 +111,10 @@ namespace ProyectoFINAL
                     bombas[0].id = 1;
                     bombas[0].estado = true;
                     bombas[0].cantidadLitros = Solicitud.litros;
+                    bombas[0].Usado++;
 
-
-
+                    Venta venta = new Venta(Solicitud.cliente,DateTime.Now.ToString("d"),DateTime.Now.ToString("t"),Solicitud.litros,Solicitud.precio, Solicitud.tipo);
+                    Diaria.ventasDia.Add(venta);
                     label4.Text = Solicitud.litros.ToString();
                     label5.Text = Solicitud.precio.ToString();
                 }
@@ -104,8 +123,10 @@ namespace ProyectoFINAL
                     bombas[1].id = 2;
                     bombas[1].estado = true;
                     bombas[1].cantidadLitros = Solicitud.litros;
+                    bombas[1].Usado++;
 
-
+                    Venta venta = new Venta(Solicitud.cliente, DateTime.Now.ToString("d"), DateTime.Now.ToString("t"), Solicitud.litros, Solicitud.precio, Solicitud.tipo);
+                    Diaria.ventasDia.Add(venta);
                     label7.Text = Solicitud.litros.ToString();
                     label6.Text = Solicitud.precio.ToString();
                 }
@@ -114,8 +135,10 @@ namespace ProyectoFINAL
                     bombas[2].id = 3;
                     bombas[2].estado = true;
                     bombas[2].cantidadLitros = Solicitud.litros;
+                    bombas[2].Usado++;
 
-
+                    Venta venta = new Venta(Solicitud.cliente, DateTime.Now.ToString("d"), DateTime.Now.ToString("t"), Solicitud.litros, Solicitud.precio, Solicitud.tipo);
+                    Diaria.ventasDia.Add(venta);
                     label11.Text = Solicitud.litros.ToString();
                     label10.Text = Solicitud.precio.ToString();
                 }
@@ -124,11 +147,18 @@ namespace ProyectoFINAL
                     bombas[3].id = 4;
                     bombas[3].estado = true;
                     bombas[3].cantidadLitros = Solicitud.litros;
-
-
+                    bombas[3].Usado++;
+                    Venta venta = new Venta(Solicitud.cliente, DateTime.Now.ToString("d"), DateTime.Now.ToString("t"), Solicitud.litros, Solicitud.precio, Solicitud.tipo);
+                    Diaria.ventasDia.Add(venta);
                     label15.Text = Solicitud.litros.ToString();
                     label14.Text = Solicitud.precio.ToString();
                 }
+                Solicitud.cliente = null;
+                Solicitud.precio = 0;
+                Solicitud.litros = 0;
+                Solicitud.id = 0;
+                Solicitud.tipo = 0;
+             
             }
             catch { }
         }
@@ -137,7 +167,10 @@ namespace ProyectoFINAL
         {
             FormularioSolicitud solicitud = new FormularioSolicitud(15.2);
             solicitud.ShowDialog();
-            Llenarinfo();
+            if (Solicitud.id != 0)
+            {
+                Llenarinfo();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -154,6 +187,9 @@ namespace ProyectoFINAL
                     serialPort.WriteLine(mesanje);
 
                     textBox1.Text = (mesanje);
+
+
+
                 }
                 catch (Exception ex)
                 {
@@ -292,6 +328,7 @@ namespace ProyectoFINAL
 
         private void verVentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ListBombas.Bombas = new List<Bomba>(bombas);
             Ventas ventas = new Ventas();
             ventas.Show();
         }

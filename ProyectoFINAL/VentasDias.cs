@@ -9,6 +9,6 @@ namespace ProyectoFINAL
     internal class VentasDias
     {
 
-        public static List<List<Venta>> ventasDias = new List<List<Venta>>();
+        public static List<List<Venta>> ventasDias { get; set; } = new List<List<Venta>>();
     }
 }

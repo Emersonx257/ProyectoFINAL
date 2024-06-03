@@ -34,6 +34,8 @@
             button1 = new Button();
             panel2 = new Panel();
             groupBox1 = new GroupBox();
+            label5 = new Label();
+            textBox1 = new TextBox();
             txtInfoPrecio = new TextBox();
             label4 = new Label();
             label3 = new Label();
@@ -42,8 +44,7 @@
             numericBomba = new NumericUpDown();
             txtPrecio = new TextBox();
             txtLitros = new TextBox();
-            textBox1 = new TextBox();
-            label5 = new Label();
+            checkBox1 = new CheckBox();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -102,6 +103,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(checkBox1);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(txtInfoPrecio);
@@ -118,6 +120,22 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Formulario";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(224, 172);
+            label5.Name = "label5";
+            label5.Size = new Size(58, 20);
+            label5.TabIndex = 58;
+            label5.Text = "Cliente:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(295, 169);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(125, 27);
+            textBox1.TabIndex = 57;
             // 
             // txtInfoPrecio
             // 
@@ -191,21 +209,16 @@
             txtLitros.TabIndex = 56;
             txtLitros.TextChanged += txtLitros_TextChanged;
             // 
-            // textBox1
+            // checkBox1
             // 
-            textBox1.Location = new Point(295, 169);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 57;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(224, 172);
-            label5.Name = "label5";
-            label5.Size = new Size(58, 20);
-            label5.TabIndex = 58;
-            label5.Text = "Cliente:";
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(38, 121);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(54, 24);
+            checkBox1.TabIndex = 59;
+            checkBox1.Text = "Full";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // FormularioSolicitud
             // 
@@ -248,5 +261,6 @@
         private Label label1;
         private Label label5;
         private TextBox textBox1;
+        private CheckBox checkBox1;
     }
 }

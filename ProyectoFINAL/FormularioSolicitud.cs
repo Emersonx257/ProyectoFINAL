@@ -36,6 +36,30 @@ namespace ProyectoFINAL
                 Solicitud.id = (int)numericBomba.Value;
                 Solicitud.precio = double.Parse(txtPrecio.Text);
                 Solicitud.litros = double.Parse(txtLitros.Text);
+                Solicitud.cliente = textBox1.Text;
+                if(checkBox1.Checked )
+                {
+                    Solicitud.tipo = 1;
+                }
+                else
+                {
+                    Solicitud.tipo = 0;
+                }
+                this.Dispose();
+            }
+            else
+            {
+                Solicitud.id = (int)numericBomba.Value;
+            
+                Solicitud.cliente = textBox1.Text;
+                if (checkBox1.Checked)
+                {
+                    Solicitud.tipo = 1;
+                }
+                else
+                {
+                    Solicitud.tipo = 0;
+                }
                 this.Dispose();
             }
         }
@@ -53,14 +77,21 @@ namespace ProyectoFINAL
 
         private void numericBomba_ValueChanged(object sender, EventArgs e)
         {
-            if(numericBomba.Value > 4)
+            if (numericBomba.Value > 4)
             {
                 numericBomba.Value = 1;
             }
-            else if(numericBomba.Value < 1)
+            else if (numericBomba.Value < 1)
             {
                 numericBomba.Value = 1;
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPrecio.Enabled = false;
+            txtLitros.Enabled = false;
+            Solicitud.litros = 100;
         }
     }
 }

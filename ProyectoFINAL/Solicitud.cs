@@ -13,5 +13,7 @@ namespace ProyectoFINAL
         public static double precio { get; set; }
         public static string cliente { get; set;}
 
+        public static int tipo { get; set; }
+
     }
 }

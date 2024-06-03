@@ -35,7 +35,6 @@
             textBox1 = new TextBox();
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
-            dataGridView1 = new DataGridView();
             panel2 = new Panel();
             groupBox4 = new GroupBox();
             pictureBox12 = new PictureBox();
@@ -97,7 +96,6 @@
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel2.SuspendLayout();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox12).BeginInit();
@@ -135,7 +133,6 @@
             panel3.Controls.Add(textBox1);
             panel3.Controls.Add(pictureBox3);
             panel3.Controls.Add(pictureBox2);
-            panel3.Controls.Add(dataGridView1);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(692, 0);
             panel3.Margin = new Padding(6, 5, 6, 5);
@@ -172,19 +169,6 @@
             pictureBox2.Size = new Size(243, 365);
             pictureBox2.TabIndex = 10;
             pictureBox2.TabStop = false;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 5);
-            dataGridView1.Margin = new Padding(6, 5, 6, 5);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(705, 373);
-            dataGridView1.TabIndex = 0;
             // 
             // panel2
             // 
@@ -781,7 +765,6 @@
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             groupBox4.ResumeLayout(false);
@@ -811,7 +794,6 @@
         #endregion
         private Panel panel1;
         private Panel panel3;
-        private DataGridView dataGridView1;
         private Panel panel2;
         private Label label1;
         private ProgressBar progressBar1;

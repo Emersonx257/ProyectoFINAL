@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProyectoFINAL
 {
-    internal class Diaria
+    internal class ListBombas
     {
-        public int id {  get; set; }
-        public static List<Venta>? ventasDia {  get; set; } = new List<Venta>();
-
-
-
+        public static List<Bomba> Bombas { get; set; } = new List<Bomba>();
     }
 }
