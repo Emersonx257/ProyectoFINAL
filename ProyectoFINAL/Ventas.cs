@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.Json;
 
 namespace ProyectoFINAL
 {
@@ -25,6 +26,10 @@ namespace ProyectoFINAL
             {
                 list.Add(venta);
             }
+
+            string root = @"C:\Users\tahay\OneDrive\Documents\VentasProyectos";
+            string json = JsonSerializer.Serialize(VentasDias.ventasDias);
+            File.WriteAllText(root, json);
             VentasDias.ventasDias.Add(list);
             Diaria.ventasDia.Clear();
         }
@@ -43,10 +48,11 @@ namespace ProyectoFINAL
             }
 
             Bomba masUsada = ListBombas.Bombas[index];
-
+            List<Bomba> list = new List<Bomba>();
+            list.Add(masUsada);
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
-            dataGridView1.DataSource = masUsada;
+            dataGridView1.DataSource = list;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -63,10 +69,11 @@ namespace ProyectoFINAL
             }
 
             Bomba menosUsada = ListBombas.Bombas[index];
-
+            List<Bomba> list = new List<Bomba>();
+            list.Add(menosUsada);
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
-            dataGridView1.DataSource = menosUsada;
+            dataGridView1.DataSource = list;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -85,6 +92,10 @@ namespace ProyectoFINAL
                 }
             }
 
+
+            string root = @"C:\Users\tahay\OneDrive\Documents\VentasProyectos";
+            string json = JsonSerializer.Serialize(TanqueLleno);
+            File.WriteAllText(root, json);
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             dataGridView1.DataSource = TanqueLleno;
@@ -108,6 +119,10 @@ namespace ProyectoFINAL
                 }
             }
 
+            string root = @"C:\Users\tahay\OneDrive\Documents\VentasProyectos";
+            string json = JsonSerializer.Serialize(Prepago);
+            File.WriteAllText(root, json);
+
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             dataGridView1.DataSource = Prepago;
@@ -115,6 +130,10 @@ namespace ProyectoFINAL
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string root = @"C:\Users\tahay\OneDrive\Documents\VentasProyectos";
+            string json = JsonSerializer.Serialize(Diaria.ventasDia);
+            File.WriteAllText(root, json);
+
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             dataGridView1.DataSource = Diaria.ventasDia;

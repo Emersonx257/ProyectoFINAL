@@ -15,6 +15,7 @@ namespace ProyectoFINAL
 
         public int Usado { get; set; }
         public int NoVenta { get; set; }
+        public int tipo { get; set; }
 
         public Bomba(string name, double cantidadLitr)
         {

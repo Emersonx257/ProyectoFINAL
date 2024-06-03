@@ -91,7 +91,7 @@ namespace ProyectoFINAL
         {
             txtPrecio.Enabled = false;
             txtLitros.Enabled = false;
-            Solicitud.litros = 100;
+            Solicitud.litros = 5;
         }
     }
 }

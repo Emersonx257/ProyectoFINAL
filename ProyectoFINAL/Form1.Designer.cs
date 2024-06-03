@@ -687,13 +687,14 @@
             // precioLitroToolStripMenuItem
             // 
             precioLitroToolStripMenuItem.Name = "precioLitroToolStripMenuItem";
-            precioLitroToolStripMenuItem.Size = new Size(180, 26);
+            precioLitroToolStripMenuItem.Size = new Size(224, 26);
             precioLitroToolStripMenuItem.Text = "Precio Litro";
+            precioLitroToolStripMenuItem.Click += precioLitroToolStripMenuItem_Click;
             // 
             // litrosBombaToolStripMenuItem
             // 
             litrosBombaToolStripMenuItem.Name = "litrosBombaToolStripMenuItem";
-            litrosBombaToolStripMenuItem.Size = new Size(180, 26);
+            litrosBombaToolStripMenuItem.Size = new Size(224, 26);
             litrosBombaToolStripMenuItem.Text = "Litros Bomba";
             // 
             // registrosToolStripMenuItem
@@ -706,14 +707,14 @@
             // verVentasToolStripMenuItem
             // 
             verVentasToolStripMenuItem.Name = "verVentasToolStripMenuItem";
-            verVentasToolStripMenuItem.Size = new Size(224, 26);
+            verVentasToolStripMenuItem.Size = new Size(201, 26);
             verVentasToolStripMenuItem.Text = "Ver Ventas";
             verVentasToolStripMenuItem.Click += verVentasToolStripMenuItem_Click;
             // 
             // cargarRegistrosToolStripMenuItem
             // 
             cargarRegistrosToolStripMenuItem.Name = "cargarRegistrosToolStripMenuItem";
-            cargarRegistrosToolStripMenuItem.Size = new Size(224, 26);
+            cargarRegistrosToolStripMenuItem.Size = new Size(201, 26);
             cargarRegistrosToolStripMenuItem.Text = "Cargar Registros";
             // 
             // menuStrip1

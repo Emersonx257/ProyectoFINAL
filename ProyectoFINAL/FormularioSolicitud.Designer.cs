@@ -34,6 +34,7 @@
             button1 = new Button();
             panel2 = new Panel();
             groupBox1 = new GroupBox();
+            checkBox1 = new CheckBox();
             label5 = new Label();
             textBox1 = new TextBox();
             txtInfoPrecio = new TextBox();
@@ -44,7 +45,6 @@
             numericBomba = new NumericUpDown();
             txtPrecio = new TextBox();
             txtLitros = new TextBox();
-            checkBox1 = new CheckBox();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -54,6 +54,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(0, 0, 64);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Fill;
@@ -64,6 +65,7 @@
             // 
             // panel3
             // 
+            panel3.BackColor = Color.Transparent;
             panel3.Controls.Add(button2);
             panel3.Controls.Add(button1);
             panel3.Dock = DockStyle.Bottom;
@@ -74,6 +76,7 @@
             // 
             // button2
             // 
+            button2.ForeColor = Color.Black;
             button2.Location = new Point(213, 52);
             button2.Name = "button2";
             button2.Size = new Size(94, 29);
@@ -84,6 +87,7 @@
             // 
             // button1
             // 
+            button1.ForeColor = Color.Black;
             button1.Location = new Point(323, 52);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
@@ -94,6 +98,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(groupBox1);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
@@ -120,6 +125,17 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Formulario";
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(38, 121);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(54, 24);
+            checkBox1.TabIndex = 59;
+            checkBox1.Text = "Full";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // label5
             // 
@@ -209,23 +225,13 @@
             txtLitros.TabIndex = 56;
             txtLitros.TextChanged += txtLitros_TextChanged;
             // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(38, 121);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(54, 24);
-            checkBox1.TabIndex = 59;
-            checkBox1.Text = "Full";
-            checkBox1.UseVisualStyleBackColor = true;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
-            // 
             // FormularioSolicitud
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(467, 370);
             Controls.Add(panel1);
+            ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             MaximizeBox = false;
             MaximumSize = new Size(485, 417);

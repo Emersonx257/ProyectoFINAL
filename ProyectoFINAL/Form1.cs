@@ -16,6 +16,7 @@ namespace ProyectoFINAL
         public Form1()
         {
             InitializeComponent();
+            Precio.precio = 10;
             bombas = new Bomba[4];
             bombas[0] = new Bomba("Bomba 1", 0);
             bombas[1] = new Bomba("Bomba 2", 0);
@@ -28,6 +29,11 @@ namespace ProyectoFINAL
             serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
             try
             {
+                serialPort.Parity = Parity.None;
+                serialPort.StopBits = StopBits.One;
+                serialPort.DataBits = 8;
+                serialPort.Handshake = Handshake.None;
+                serialPort.RtsEnable = true;
                 serialPort.Open();
             }
             catch { }
@@ -56,15 +62,50 @@ namespace ProyectoFINAL
                 MessageBox.Show("Error al leer los datos: " + ex.Message);
             }
         }
+        public struct Bomb
+        {
+            public bool active;
+            public bool Canceled;
+            public float initialDistance;
+            public float targetPercentage;
+            public float targetDistance;
+            public float LitrosLlevados;
+            public int NoVenta;
+            public int tipo;
+        };
 
         private void ProcesarDatos(string data)
         {
             try
             {
                 // Intentar deserializar el JSON
-                dynamic json = JsonConvert.DeserializeObject(data);
+                var datas = JsonConvert.DeserializeObject<Bomb>(data);
+
                 // Si la deserialización tiene éxito, procesar los datos JSON
-                ProcesarDatosJson(json);
+               
+                    double LL = datas.LitrosLlevados;
+                    int idVenta = datas.NoVenta;
+                    int tipos = datas.tipo;
+                    if (tipos == 1)
+                    {
+                        
+                        {
+                        
+                        if (idVenta == (Diaria.ventasDia.Count - 1))
+                            {
+                            Venta v = Diaria.ventasDia[idVenta];
+                            v.cantidad = LL;
+                                v.precio = LL * Precio.precio;
+                                int index = Diaria.ventasDia.IndexOf(v);
+                                Diaria.ventasDia[index] = v;
+                                
+                            }
+                        }
+                    }
+                    // Muestra los datos en un MessageBox o actualiza la UI
+                    MessageBox.Show($"Litros {LL} IDventa {idVenta}");
+
+                
             }
             catch (JsonException)
             {
@@ -78,22 +119,7 @@ namespace ProyectoFINAL
             }
         }
 
-        private void ProcesarDatosJson(dynamic json)
-        {
-            try
-            {
-                string sensor = json.sensor;
-                double valor = json.valor;
-                string unidad = json.unidad;
 
-                // Muestra los datos en un MessageBox o actualiza la UI
-                MessageBox.Show($"Sensor: {sensor}\nValor: {valor}\nUnidad: {unidad}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al procesar JSON: " + ex.Message);
-            }
-        }
 
 
 
@@ -111,61 +137,65 @@ namespace ProyectoFINAL
                     bombas[0].id = 1;
                     bombas[0].estado = true;
                     bombas[0].cantidadLitros = Solicitud.litros;
+                    bombas[0].tipo = Solicitud.tipo;
                     bombas[0].Usado++;
 
-                    Venta venta = new Venta(Solicitud.cliente,DateTime.Now.ToString("d"),DateTime.Now.ToString("t"),Solicitud.litros,Solicitud.precio, Solicitud.tipo);
+                    Venta venta = new Venta(Solicitud.cliente, DateTime.Now.ToString("d"), DateTime.Now.ToString("t"), Solicitud.litros, Solicitud.precio, Solicitud.tipo);
                     Diaria.ventasDia.Add(venta);
-                    label4.Text = Solicitud.litros.ToString();
-                    label5.Text = Solicitud.precio.ToString();
+                    // label4.Text = Solicitud.litros.ToString();
+                    // label5.Text = Solicitud.precio.ToString();
                 }
                 else if (Solicitud.id == 2)
                 {
                     bombas[1].id = 2;
                     bombas[1].estado = true;
                     bombas[1].cantidadLitros = Solicitud.litros;
+                    bombas[1].tipo = Solicitud.tipo;
                     bombas[1].Usado++;
 
                     Venta venta = new Venta(Solicitud.cliente, DateTime.Now.ToString("d"), DateTime.Now.ToString("t"), Solicitud.litros, Solicitud.precio, Solicitud.tipo);
                     Diaria.ventasDia.Add(venta);
-                    label7.Text = Solicitud.litros.ToString();
-                    label6.Text = Solicitud.precio.ToString();
+                    // label7.Text = Solicitud.litros.ToString();
+                    // label6.Text = Solicitud.precio.ToString();
                 }
                 else if (Solicitud.id == 3)
                 {
                     bombas[2].id = 3;
                     bombas[2].estado = true;
                     bombas[2].cantidadLitros = Solicitud.litros;
+                    bombas[2].tipo = Solicitud.tipo;
                     bombas[2].Usado++;
 
                     Venta venta = new Venta(Solicitud.cliente, DateTime.Now.ToString("d"), DateTime.Now.ToString("t"), Solicitud.litros, Solicitud.precio, Solicitud.tipo);
                     Diaria.ventasDia.Add(venta);
-                    label11.Text = Solicitud.litros.ToString();
-                    label10.Text = Solicitud.precio.ToString();
+                    // label11.Text = Solicitud.litros.ToString();
+                    //   label10.Text = Solicitud.precio.ToString();
                 }
                 else if (Solicitud.id == 4)
                 {
                     bombas[3].id = 4;
                     bombas[3].estado = true;
                     bombas[3].cantidadLitros = Solicitud.litros;
+                    bombas[3].tipo = Solicitud.tipo;
                     bombas[3].Usado++;
                     Venta venta = new Venta(Solicitud.cliente, DateTime.Now.ToString("d"), DateTime.Now.ToString("t"), Solicitud.litros, Solicitud.precio, Solicitud.tipo);
                     Diaria.ventasDia.Add(venta);
-                    label15.Text = Solicitud.litros.ToString();
-                    label14.Text = Solicitud.precio.ToString();
+                    //  label15.Text = Solicitud.litros.ToString();
+                    //  label14.Text = Solicitud.precio.ToString();
                 }
                 Solicitud.cliente = null;
                 Solicitud.precio = 0;
                 Solicitud.litros = 0;
                 Solicitud.id = 0;
                 Solicitud.tipo = 0;
-             
+
             }
             catch { }
         }
 
         private void realizarSolicitudToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormularioSolicitud solicitud = new FormularioSolicitud(15.2);
+            FormularioSolicitud solicitud = new FormularioSolicitud(Precio.precio);
             solicitud.ShowDialog();
             if (Solicitud.id != 0)
             {
@@ -186,9 +216,9 @@ namespace ProyectoFINAL
                     // MessageBox.Show(mesanje);
                     serialPort.WriteLine(mesanje);
 
-                    textBox1.Text = (mesanje);
+                    // textBox1.Text = (mesanje);
 
-
+                   
 
                 }
                 catch (Exception ex)
@@ -220,7 +250,11 @@ namespace ProyectoFINAL
                     // MessageBox.Show(mesanje);
                     serialPort.WriteLine(mesanje);
 
-                    textBox1.Text = (mesanje);
+                    //   textBox1.Text = (mesanje);
+                    for (int i = 0; i < 4; i++)
+                    {
+                        bombas[i].id = 0;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -254,7 +288,11 @@ namespace ProyectoFINAL
                     // MessageBox.Show(mesanje);
                     serialPort.WriteLine(mesanje);
 
-                    textBox1.Text = (mesanje);
+                    // textBox1.Text = (mesanje);
+                    for (int i = 0; i < 4; i++)
+                    {
+                        bombas[i].id = 0;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -285,7 +323,11 @@ namespace ProyectoFINAL
                     // MessageBox.Show(mesanje);
                     serialPort.WriteLine(mesanje);
 
-                    textBox1.Text = (mesanje);
+                    // textBox1.Text = (mesanje);
+                    for (int i = 0; i < 4; i++)
+                    {
+                        bombas[i].id = 0;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -331,6 +373,11 @@ namespace ProyectoFINAL
             ListBombas.Bombas = new List<Bomba>(bombas);
             Ventas ventas = new Ventas();
             ventas.Show();
+        }
+
+        private void precioLitroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
